@@ -100,33 +100,38 @@
 
         <!-- Difficulty Selection Screen -->
         <div id="difficulty-screen" class="hidden flex-col w-full h-full items-center justify-center py-4">
-            <div class="bg-white rounded-3xl shadow-lg border border-emerald-100 p-6 w-full max-w-md text-center overflow-y-auto">
+            <div class="bg-white rounded-3xl shadow-lg border border-emerald-100 p-6 w-full max-w-md text-center max-h-[85vh] overflow-y-auto">
                 <h2 class="text-2xl font-bold text-dark mb-1" id="diff-surah-title">Surat</h2>
-                <p class="text-gray-500 mb-6">Pilih Tingkat Kesulitan</p>
+                <p class="text-gray-500 mb-4">Pilih Tingkat Kesulitan</p>
                 
-                <div class="flex flex-col gap-3">
-                    <button onclick="startQuizWithDifficulty(1)" class="w-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 p-4 rounded-xl text-left transition relative overflow-hidden group">
-                        <div class="font-bold text-lg">Tingkat 1: Dasar</div>
-                        <div class="text-sm text-emerald-600">Urutkan 1 ayat saja tanpa pengecoh.</div>
+                <div class="flex flex-col gap-2.5 text-left">
+                    <button onclick="startQuizWithDifficulty(1)" class="w-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-900 p-3.5 rounded-xl transition relative overflow-hidden group">
+                        <div class="font-bold text-base">Tingkat 1: Dasar</div>
+                        <div class="text-xs text-emerald-600">Urutkan 1 ayat saja tanpa kata pengecoh.</div>
                     </button>
                     
-                    <button onclick="startQuizWithDifficulty(2)" class="w-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 p-4 rounded-xl text-left transition relative overflow-hidden group">
-                        <div class="font-bold text-lg">Tingkat 2: Tantangan</div>
-                        <div class="text-sm text-amber-600">Urutkan 1 ayat, awas ada <b>blok kata pengecoh</b>!</div>
+                    <button onclick="startQuizWithDifficulty(2)" class="w-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 p-3.5 rounded-xl transition relative overflow-hidden group">
+                        <div class="font-bold text-base">Tingkat 2: Tantangan</div>
+                        <div class="text-xs text-amber-600">Urutkan 1 ayat, awas ada <b>blok kata pengecoh</b>!</div>
                     </button>
                     
-                    <button onclick="startQuizWithDifficulty(3)" class="w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-900 p-4 rounded-xl text-left transition relative overflow-hidden group">
-                        <div class="font-bold text-lg">Tingkat 3: Tadabbur Dasar</div>
-                        <div class="text-sm text-blue-600">Seperti Tingkat 1, ditambah mencocokkan arti di bawah kata Arabnya.</div>
+                    <button onclick="startQuizWithDifficulty(3)" class="w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-900 p-3.5 rounded-xl transition relative overflow-hidden group">
+                        <div class="font-bold text-base">Tingkat 3: Tadabbur Dasar</div>
+                        <div class="text-xs text-blue-600">Urutkan kata Arab, lalu cocokkan arti di bawah katanya.</div>
                     </button>
                     
-                    <button onclick="startQuizWithDifficulty(4)" class="w-full bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-900 p-4 rounded-xl text-left transition relative overflow-hidden group">
-                        <div class="font-bold text-lg">Tingkat 4: Tadabbur Tantangan</div>
-                        <div class="text-sm text-rose-600">Ada blok pengecoh, urutkan ayatnya, lalu cocokkan arti per katanya!</div>
+                    <button onclick="startQuizWithDifficulty(4)" class="w-full bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-900 p-3.5 rounded-xl transition relative overflow-hidden group">
+                        <div class="font-bold text-base">Tingkat 4: Tadabbur Tantangan</div>
+                        <div class="text-xs text-rose-600">Ada blok pengecoh, urutkan ayat, lalu cocokkan arti katanya.</div>
+                    </button>
+
+                    <button onclick="startQuizWithDifficulty(5)" class="w-full bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-950 p-3.5 rounded-xl transition relative overflow-hidden group">
+                        <div class="font-bold text-base">Tingkat 5: Huffadh (Gabung Ayat)</div>
+                        <div class="text-xs text-purple-700"><b>1 blok bercampur!</b> Kata ayat aktif & pengecoh menyatu di satu div acak.</div>
                     </button>
                 </div>
                 
-                <button onclick="showSelectionScreen()" class="mt-6 text-gray-500 hover:text-dark font-medium underline">Kembali</button>
+                <button onclick="showSelectionScreen()" class="mt-5 text-gray-500 hover:text-dark font-medium underline text-sm">Kembali</button>
             </div>
         </div>
 
@@ -172,14 +177,14 @@
         <div id="modal-content" class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl transform scale-90 opacity-0 transition-all duration-300 flex flex-col items-center text-center">
             <div id="modal-icon" class="w-20 h-20 rounded-full flex items-center justify-center mb-4"></div>
             <h2 id="modal-title" class="text-2xl font-bold mb-2">Judul</h2>
-            <p id="modal-message" class="text-gray-600 mb-6">Pesan modal</p>
+            <div id="modal-message" class="text-gray-600 mb-6">Pesan modal</div>
             <button id="modal-btn" class="w-full font-bold text-lg py-3 rounded-xl transition-colors text-white">Lanjut</button>
         </div>
     </div>
 
     <!-- Script Utama -->
     <script>
-        let allSurahsList = []; // Menyimpan data 114 surat dari API
+        let allSurahsList = []; // Menyimpan daftar 114 surat dari API
         let currentSurahNumber = null;
         let currentSurahName = "";
         let currentSurahData = []; // Data ayat dari API
@@ -190,6 +195,11 @@
         let currentBlocks = []; 
         let correctOrder = []; 
         let userSelection = []; 
+
+        // Statistik Kuis (Baru)
+        let quizStartTime = null;
+        let totalMistakes = 0;
+        let modalTimeout = null; // Menyimpan timeout aktif modal
 
         // DOM Elements
         const selectionScreen = document.getElementById('selection-screen');
@@ -251,7 +261,6 @@
             list.forEach(surah => {
                 const btn = document.createElement('button');
                 btn.className = 'bg-white hover:bg-emerald-50 text-dark font-semibold py-3 px-2 rounded-xl shadow-sm border border-emerald-100 hover:border-emerald-300 transition-all active:scale-95 flex flex-col items-center justify-center gap-1';
-                // name_simple adalah transliterasi (ex: Al-Baqarah)
                 btn.onclick = () => showDifficultyScreen(surah.id, surah.name_simple);
                 btn.innerHTML = `
                     <span class="text-xs text-emerald-500 font-bold">Surat ${surah.id}</span>
@@ -317,15 +326,14 @@
             await fetchSurahVerses(currentSurahNumber);
         }
 
-        // 3. Penarikan Ayat Berantai (Auto-Pagination untuk surat panjang seperti Al-Baqarah)
+        // 3. Penarikan Ayat Berantai (Auto-Pagination)
         async function fetchSurahVerses(number) {
-            setLoading(true, "Mengambil Ayat...", "Mengunduh data surat. Jika suratnya panjang, ini butuh waktu beberapa detik.");
+            setLoading(true, "Mengambil Ayat...", "Mengunduh data surat. Mohon bersabar.");
             currentSurahData = [];
             let page = 1;
             let totalPages = 1;
 
             try {
-                // Loop untuk mengambil semua halaman sampai selesai
                 do {
                     const url = `https://api.quran.com/api/v4/verses/by_chapter/${number}?language=id&words=true&word_translation_language=id&word_fields=text_uthmani&per_page=50&page=${page}`;
                     const response = await fetch(url);
@@ -335,7 +343,6 @@
                         currentSurahData = currentSurahData.concat(data.verses);
                         totalPages = data.pagination.total_pages;
                         
-                        // Update UI loading untuk surat panjang
                         if (totalPages > 1) {
                             loadingSubtext.textContent = `Mengunduh bagian ${page} dari ${totalPages}...`;
                         }
@@ -370,11 +377,16 @@
             if (currentDifficulty === 1) { badgeText = "Tingkat 1: Dasar"; badgeClass = "bg-emerald-100 text-emerald-800"; }
             else if (currentDifficulty === 2) { badgeText = "Tingkat 2: Tantangan"; badgeClass = "bg-amber-100 text-amber-800"; }
             else if (currentDifficulty === 3) { badgeText = "Tingkat 3: Tadabbur Dasar"; badgeClass = "bg-blue-100 text-blue-800"; }
-            else { badgeText = "Tingkat 4: Tadabbur Tantangan"; badgeClass = "bg-rose-100 text-rose-800"; }
+            else if (currentDifficulty === 4) { badgeText = "Tingkat 4: Tadabbur Tantangan"; badgeClass = "bg-rose-100 text-rose-800"; }
+            else { badgeText = "Tingkat 5: Huffadh (Gabung Ayat)"; badgeClass = "bg-purple-150 text-purple-800 bg-purple-100"; }
             
             diffBadgeEl.textContent = badgeText;
             diffBadgeEl.className = `text-xs font-bold px-3 py-1 rounded-full mb-2 ${badgeClass}`;
             
+            // Catat waktu mulai pengerjaan kuis
+            quizStartTime = Date.now();
+            totalMistakes = 0;
+
             initAyah();
         }
 
@@ -399,14 +411,22 @@
             levelIndicatorEl.textContent = `Ayat ${currentAyahIndex + 1} / ${totalAyahs}`;
             
             if (currentPhase === 'arab') {
-                quizInstructionEl.textContent = (currentDifficulty === 2 || currentDifficulty === 4) 
-                    ? "TATA AYAT (ARAB): Pilih kata dari blok yang tepat!"
-                    : "TATA AYAT (ARAB): Susunlah kata menjadi ayat yang benar!";
+                if (currentDifficulty === 2 || currentDifficulty === 4) {
+                    quizInstructionEl.textContent = "TATA AYAT (ARAB): Pilih kata dari blok yang tepat!";
+                } else if (currentDifficulty === 5) {
+                    quizInstructionEl.textContent = "TATA AYAT (GABUNGAN): Pisahkan kata ayat aktif & pengecoh di bawah!";
+                } else {
+                    quizInstructionEl.textContent = "TATA AYAT (ARAB): Susunlah kata menjadi ayat yang benar!";
+                }
                 quizInstructionEl.className = "text-sm font-semibold text-emerald-700 bg-emerald-50 px-4 py-2 rounded-xl border border-emerald-200 shadow-sm";
             } else {
-                quizInstructionEl.textContent = (currentDifficulty === 4) 
-                    ? "TATA ARTI: Awas blok pengecoh! Isi arti di bawah setiap kata Arab."
-                    : "TATA ARTI: Lengkapi terjemahan per kata di bawah huruf Arabnya!";
+                if (currentDifficulty === 4) {
+                    quizInstructionEl.textContent = "TATA ARTI: Awas blok pengecoh! Isi arti di bawah setiap kata Arab.";
+                } else if (currentDifficulty === 5) {
+                    quizInstructionEl.textContent = "TATA ARTI (GABUNGAN): Cari arti mufrodat yang tepat pada satu blok gabungan!";
+                } else {
+                    quizInstructionEl.textContent = "TATA ARTI: Lengkapi terjemahan per kata di bawah huruf Arabnya!";
+                }
                 quizInstructionEl.className = "text-sm font-semibold text-blue-700 bg-blue-50 px-4 py-2 rounded-xl border border-blue-200 shadow-sm";
             }
 
@@ -424,7 +444,6 @@
                 };
             };
 
-            // Ambil kata (buang marker nomor ayat 'end')
             correctOrder = currentVerse.words
                 .filter(w => w.char_type_name === 'word')
                 .map(extractWordData);
@@ -432,7 +451,8 @@
             let targetBlockWords = [...correctOrder];
             let distractorBlockWords = [];
 
-            if (currentDifficulty === 2 || currentDifficulty === 4) {
+            // Pengecoh disiapkan untuk Level 2, 4, dan 5
+            if (currentDifficulty === 2 || currentDifficulty === 4 || currentDifficulty === 5) {
                 let distractorIndex = currentAyahIndex < totalAyahs - 1 ? currentAyahIndex + 1 : currentAyahIndex - 1;
                 if (distractorIndex >= 0 && distractorIndex !== currentAyahIndex) {
                     const distractorVerse = currentSurahData[distractorIndex];
@@ -451,11 +471,19 @@
                 }
             }
 
-            if (distractorBlockWords.length > 0) {
+            // Aturan Blok Pilihan
+            if (currentDifficulty === 5) {
+                // TINGKAT 5: Kata target & distractor menyatu lebur dalam SATU blok tunggal
+                distractorBlockWords = shuffleArray(distractorBlockWords);
+                let merged = [...targetBlockWords, ...distractorBlockWords];
+                currentBlocks = [shuffleArray(merged)];
+            } else if (distractorBlockWords.length > 0) {
+                // TINGKAT 2 dan 4: Terpisah dalam 2 blok acak
                 distractorBlockWords = shuffleArray(distractorBlockWords);
                 let blocks = [targetBlockWords, distractorBlockWords];
                 currentBlocks = shuffleArray(blocks); 
             } else {
+                // TINGKAT 1 dan 3: Hanya 1 blok berisi kata target saja
                 currentBlocks = [targetBlockWords];
             }
 
@@ -621,15 +649,29 @@
             render();
         }
 
+        // Hitung waktu durasi kuis
+        function getElapsedTimeMessage() {
+            const ms = Date.now() - quizStartTime;
+            const totalSeconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            
+            if (minutes > 0) {
+                return `${minutes} menit ${seconds} detik`;
+            }
+            return `${seconds} detik`;
+        }
+
         function checkAnswer() {
+            // Validasi kelengkapan
             if (currentPhase === 'arti') {
                 if (userSelection.includes(null)) {
-                    showModal('error', 'Belum Lengkap', 'Masih ada slot arti yang kosong. Silakan isi semuanya di bawah kata Arab.', 'Perbaiki');
+                    showModal('error', 'Belum Lengkap', 'Masih ada slot arti yang kosong. Silakan isi semuanya di bawah kata Arab.', 'Perbaiki', null, true);
                     return;
                 }
             } else {
                 if (userSelection.length !== correctOrder.length) {
-                    showModal('error', 'Belum Lengkap', `Jawaban harus terdiri dari ${correctOrder.length} kata. Anda memasukkan ${userSelection.length} kata.`, 'Perbaiki');
+                    showModal('error', 'Belum Lengkap', `Jawaban harus terdiri dari ${correctOrder.length} kata. Anda memasukkan ${userSelection.length} kata.`, 'Perbaiki', null, true);
                     return;
                 }
             }
@@ -637,55 +679,105 @@
             const isCorrect = userSelection.every((word, index) => word && word.id === correctOrder[index].id);
 
             if (isCorrect) {
-                if (currentPhase === 'arab' && (currentDifficulty === 3 || currentDifficulty === 4)) {
+                // Cek apakah ada fase mufrodat/arti berikutnya untuk tingkat 3, 4, 5
+                const hasTranslationPhase = currentDifficulty >= 3;
+                
+                if (currentPhase === 'arab' && hasTranslationPhase) {
+                    // Berhasil fase Arab -> Lanjut fase terjemahan (Popup auto-dismiss)
                     showModal(
                         'success',
                         'Susunan Arab Benar!',
-                        'Luar biasa! Sekarang tahap Mufrodat: Temukan arti dari setiap kata Arab yang sudah Anda susun tadi.',
+                        'Luar biasa! Lanjut temukan arti di bawah setiap kata Arabnya.',
                         'Lanjut Susun Arti',
                         () => {
                             currentPhase = 'arti'; 
                             setupPhaseData(); 
-                        }
+                        },
+                        true // Popup otomatis hilang sendiri
                     );
                     return; 
                 }
 
+                // Cek apakah ayat yang selesai ini adalah ayat terakhir dari surat tersebut
                 const isLastAyah = currentAyahIndex === currentSurahData.length - 1;
                 
-                showModal(
-                    'success',
-                    'Alhamdulillah, Tepat!',
-                    isLastAyah ? 'Masya Allah! Anda telah menyelesaikan seluruh ayat beserta artinya dalam surat ini dengan sangat baik.' : 'Luar biasa! Hafalan dan pemahaman Anda tepat. Lanjut ke ayat berikutnya.',
-                    isLastAyah ? 'Pilih Surat Lain' : 'Ayat Berikutnya',
-                    () => {
-                        if (!isLastAyah) {
+                if (isLastAyah) {
+                    // DI AKHIR SURAT: Tampilkan hasil statistik utuh (KUDU DIKLIK / TIDAK HILANG OTOMATIS)
+                    const durasi = getElapsedTimeMessage();
+                    const statsHtml = `
+                        <div class="mt-4 bg-emerald-50 rounded-2xl p-4 border border-emerald-100 text-left space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500 font-medium">Surat:</span>
+                                <span class="text-dark font-bold">${currentSurahName}</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500 font-medium">Jumlah Ayat:</span>
+                                <span class="text-dark font-bold">${currentSurahData.length} ayat</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500 font-medium">Total Kesalahan:</span>
+                                <span class="text-red-500 font-extrabold">${totalMistakes} kali salah</span>
+                            </div>
+                            <div class="flex justify-between text-sm border-t border-emerald-100 pt-2">
+                                <span class="text-gray-500 font-medium">Durasi Muraja'ah:</span>
+                                <span class="text-primary font-extrabold">${durasi}</span>
+                            </div>
+                        </div>
+                    `;
+                    showModal(
+                        'success',
+                        'Masya Allah, Tuntas!',
+                        statsHtml,
+                        'Pilih Surat Lain',
+                        () => {
+                            showSelectionScreen();
+                        },
+                        false // TIDAK HILANG OTOMATIS
+                    );
+                } else {
+                    // Ayat biasa berhasil diselesaikan -> otomatis lanjut ayat berikutnya (Popup auto-dismiss)
+                    showModal(
+                        'success',
+                        'Benar!',
+                        'Lanjutkan hafalan ke ayat berikutnya.',
+                        'Ayat Berikutnya',
+                        () => {
                             currentAyahIndex++;
                             initAyah();
-                        } else {
-                            showSelectionScreen();
-                        }
-                    }
-                );
+                        },
+                        true // Popup otomatis hilang sendiri
+                    );
+                }
             } else {
+                // Jawaban salah -> Catat kesalahan dan tunjukkan popup salah (Popup auto-dismiss)
+                totalMistakes++;
                 showModal(
                     'error',
                     'Belum Tepat',
-                    currentPhase === 'arti' ? 'Masih ada arti yang tidak sesuai dengan mufrodat bahasa Arabnya. Coba ditukar kembali!' : 'Susunan masih ada yang salah. Ingat, jangan sampai tertukar dengan kata pengecoh!',
-                    'Coba Lagi'
+                    'Ada urutan kata yang kurang tepat. Coba periksa kembali!',
+                    'Coba Lagi',
+                    null,
+                    true // Popup otomatis hilang sendiri
                 );
             }
         }
 
-        function showModal(type, title, message, btnText, callback = null) {
+        // Sistem Modal Kustom dengan Fitur Auto-Dismiss
+        function showModal(type, title, messageHtml, btnText, callback = null, autoDismiss = false) {
+            // Bersihkan timeout modal yang sedang berjalan jika ada
+            if (modalTimeout) {
+                clearTimeout(modalTimeout);
+                modalTimeout = null;
+            }
+
             modalTitle.textContent = title;
-            modalMessage.textContent = message;
+            modalMessage.innerHTML = messageHtml; // Menggunakan innerHTML agar bisa merender statistik akhir
             modalBtn.textContent = btnText;
 
             modalIcon.className = 'w-20 h-20 rounded-full flex items-center justify-center mb-4';
             modalBtn.className = 'w-full font-bold text-lg py-3 rounded-xl transition-colors text-white shadow-md';
 
-            if (type === 'success' || type === 'finish') {
+            if (type === 'success') {
                 modalIcon.classList.add('bg-emerald-100', 'text-emerald-500');
                 modalIcon.innerHTML = '<i class="ph-fill ph-check-circle text-5xl"></i>';
                 modalBtn.classList.add('bg-primary', 'hover:bg-dark');
@@ -700,6 +792,17 @@
                 if(callback) callback();
             };
 
+            // Jika autoDismiss diset TRUE, sembunyikan tombol dan pasang timer otomatis
+            if (autoDismiss) {
+                modalBtn.classList.add('hidden');
+                modalTimeout = setTimeout(() => {
+                    hideModal();
+                    if(callback) callback();
+                }, 1800); // 1.8 detik
+            } else {
+                modalBtn.classList.remove('hidden');
+            }
+
             modalOverlay.classList.remove('hidden');
             modalOverlay.classList.add('flex');
             
@@ -710,6 +813,10 @@
         }
 
         function hideModal() {
+            if (modalTimeout) {
+                clearTimeout(modalTimeout);
+                modalTimeout = null;
+            }
             modalContent.classList.remove('scale-100', 'opacity-100');
             modalContent.classList.add('scale-90', 'opacity-0');
             setTimeout(() => {
@@ -718,62 +825,9 @@
             }, 300);
         }
 
-        // Mulai Aplikasi dengan mengambil 114 Surat
+        // Mulai Aplikasi
         fetchAllSurahs();
 
     </script>
 </body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Urut Ayat - Tahfidz Interaktif 30 Juz</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        arabic: ['Amiri', 'serif'],
-                    },
-                    colors: {
-                        primary: '#059669', // Emerald 600
-                        secondary: '#10B981', // Emerald 500
-                        accent: '#F59E0B', // Amber 500
-                        dark: '#064E3B', // Emerald 900
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #f0fdf4;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='#10b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .verse-card { transition: all 0.2s ease-in-out; }
-        .verse-card:active { transform: scale(0.95); }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
-        
-        /* Scrollbar kustom untuk list surat */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background-color: #a7f3d0; border-radius: 10px; }
-    </style>
-</head>
 </html>
